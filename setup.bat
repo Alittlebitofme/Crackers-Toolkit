@@ -25,6 +25,36 @@ echo Install location: %BASE%
 echo.
 
 :: -------------------------------------------------------
+:: 0. Ensure we can extract .7z archives
+:: -------------------------------------------------------
+set "SEVENZIP="
+where 7z >nul 2>&1
+if %errorlevel% equ 0 (
+    set "SEVENZIP=7z"
+) else (
+    :: Check common install locations
+    if exist "C:\Program Files\7-Zip\7z.exe" (
+        set "SEVENZIP=C:\Program Files\7-Zip\7z.exe"
+    ) else if exist "C:\Program Files (x86)\7-Zip\7z.exe" (
+        set "SEVENZIP=C:\Program Files (x86)\7-Zip\7z.exe"
+    ) else (
+        echo [0/5] 7-Zip not found — downloading standalone 7zr.exe...
+        set "SEVENZIP=%TEMP%\7zr.exe"
+        if not exist "!SEVENZIP!" (
+            curl -L -o "!SEVENZIP!" "https://www.7-zip.org/a/7zr.exe" 2>nul
+            if !errorlevel! neq 0 (
+                echo       Failed to download 7zr.exe.
+                set "SEVENZIP="
+            ) else (
+                echo       Downloaded 7zr.exe for .7z extraction.
+            )
+        ) else (
+            echo       Using cached 7zr.exe.
+        )
+    )
+)
+
+:: -------------------------------------------------------
 :: 1. Check / Install Python 3.12+
 :: -------------------------------------------------------
 echo [1/5] Checking Python...
@@ -63,14 +93,18 @@ if exist "%BASE%\hashcat-7.1.2\hashcat.exe" (
         echo       Extract to: %BASE%\hashcat-7.1.2\
     ) else (
         echo       Extracting hashcat...
-        :: Try 7z first, then PowerShell tar
-        where 7z >nul 2>&1
-        if !errorlevel! equ 0 (
-            7z x "!HC_ZIP!" -o"%BASE%" -y >nul 2>&1
-            echo       hashcat installed.
+        if defined SEVENZIP (
+            "!SEVENZIP!" x "!HC_ZIP!" -o"%BASE%" -y >nul 2>&1
+            if exist "%BASE%\hashcat-7.1.2\hashcat.exe" (
+                echo       hashcat installed.
+            ) else (
+                echo       Extraction failed. Please download manually:
+                echo       https://hashcat.net/hashcat/
+                echo       Extract to: %BASE%\hashcat-7.1.2\
+            )
         ) else (
-            echo       Cannot extract .7z — 7-Zip not found.
-            echo       Please install 7-Zip or download hashcat manually:
+            echo       Cannot extract .7z — 7-Zip not available.
+            echo       Please download hashcat manually:
             echo       https://hashcat.net/hashcat/
             echo       Extract to: %BASE%\hashcat-7.1.2\
         )
@@ -127,14 +161,14 @@ if !PP_FOUND! equ 1 (
         echo       Download failed. Please download manually from:
         echo       https://github.com/hashcat/princeprocessor/releases
     ) else (
-        where 7z >nul 2>&1
-        if !errorlevel! equ 0 (
+        if defined SEVENZIP (
             if not exist "%BASE%\Scripts_to_use" mkdir "%BASE%\Scripts_to_use"
-            7z x "!PP_ZIP!" -o"%BASE%\Scripts_to_use\princeprocessor-master" -y >nul 2>&1
+            "!SEVENZIP!" x "!PP_ZIP!" -o"%BASE%\Scripts_to_use\princeprocessor-master" -y >nul 2>&1
             echo       PRINCE Processor installed.
         ) else (
-            echo       Cannot extract .7z — 7-Zip not found.
-            echo       Please install 7-Zip or download manually.
+            echo       Cannot extract .7z — 7-Zip not available.
+            echo       Please download manually from:
+            echo       https://github.com/hashcat/princeprocessor/releases
         )
     )
 )
