@@ -108,12 +108,10 @@ def main() -> None:
         splash.show()
         app.processEvents()
 
-    # Determine workspace base directory (where this repo lives)
+    # Determine workspace base directory (where external tools live)
     if getattr(sys, 'frozen', False):
-        # Frozen exe: walk up from exe location to find the workspace root
-        exe_dir = Path(sys.executable).resolve().parent
-        # dist/CrackersToolkit/CrackersToolkit.exe -> workspace is 2 levels up
-        base_dir = exe_dir.parent.parent
+        # Frozen exe: tools are next to the exe (same folder as setup.bat)
+        base_dir = Path(sys.executable).resolve().parent
     else:
         base_dir = Path(__file__).resolve().parent.parent
 
