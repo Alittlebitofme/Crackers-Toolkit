@@ -151,6 +151,47 @@ The application uses the **Catppuccin Mocha** dark theme with custom SVG icons f
 
 ---
 
+## Acknowledgements & Credits
+
+Cracker's Toolkit is a GUI wrapper — the real heavy lifting is done by these incredible open-source projects and their authors:
+
+### Core Cracking Engines
+
+| Project | Author / Team | License | Link |
+|---------|--------------|---------|------|
+| **Hashcat** | Jens "atom" Steube & the hashcat team | MIT | [hashcat.net](https://hashcat.net/) |
+| **John the Ripper** | Openwall / Solar Designer & contributors | GPL v2 | [openwall.com/john](https://www.openwall.com/john/) |
+
+### Wordlist & Candidate Tools
+
+| Project | Author / Team | License | Link |
+|---------|--------------|---------|------|
+| **PRINCE Processor** | hashcat team | MIT | [github.com/hashcat/princeprocessor](https://github.com/hashcat/princeprocessor) |
+| **PCFG Cracker** | Matt Weir (lakiw) | GPL v3 | [github.com/lakiw/pcfg_cracker](https://github.com/lakiw/pcfg_cracker) |
+| **demeuk** | Roel van Dijk (roeldev) | MIT | [github.com/roeldev/demeuk](https://github.com/roeldev/demeuk) |
+| **PACK** (Password Analysis & Cracking Kit) | Peter Kacherginsky (iphelix) | GPL v2 | [github.com/iphelix/pack](https://github.com/iphelix/pack) |
+| **combinatorX** | hashcat community | MIT | Included in source |
+
+### Libraries & Frameworks
+
+| Project | Role | Link |
+|---------|------|------|
+| **PyQt6** / Qt 6 | GUI framework | [riverbankcomputing.com](https://riverbankcomputing.com/software/pyqt/) |
+| **PyInstaller** | Freeze to standalone exe | [pyinstaller.org](https://pyinstaller.org/) |
+| **Catppuccin** | Mocha color palette / theme | [github.com/catppuccin](https://github.com/catppuccin) |
+| **7-Zip** | Archive extraction (setup) | [7-zip.org](https://www.7-zip.org/) |
+
+### Optional Runtime Dependencies
+
+- **Python 3** — [python.org](https://www.python.org/) — required for PCFG, demeuk, and scraper modules
+- **Strawberry Perl** — [strawberryperl.com](https://strawberryperl.com/) — optional, for JtR Perl-based extractors
+
+### A Note of Thanks
+
+This project would not exist without the years of research, engineering, and open-source generosity from the teams above. If you find Cracker's Toolkit useful, please consider starring or contributing to the upstream projects as well.
+
+---
+
 ## License
 
-This project integrates multiple open-source tools, each under their own license. See `hashcat-7.1.2/docs/license.txt` and individual tool directories for details.
+Cracker's Toolkit (the GUI wrapper) is provided as-is for educational and authorized security-testing purposes. Each bundled tool retains its own license — see the respective project directories and links above for details.
