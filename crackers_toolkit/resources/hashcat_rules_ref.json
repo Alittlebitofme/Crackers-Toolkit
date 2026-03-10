@@ -1,0 +1,82 @@
+{
+  "categories": [
+    {
+      "name": "Case",
+      "rules": [
+        {"symbol": "l", "name": "Lowercase", "description": "Lowercase all letters", "example": "l -> password", "tooltip": "Convert the entire word to lowercase."},
+        {"symbol": "u", "name": "Uppercase", "description": "Uppercase all letters", "example": "u -> PASSWORD", "tooltip": "Convert the entire word to uppercase."},
+        {"symbol": "c", "name": "Capitalize", "description": "Capitalize first letter, lower rest", "example": "c -> Password", "tooltip": "First character uppercase, rest lowercase."},
+        {"symbol": "C", "name": "Invert capitalize", "description": "Lowercase first, upper rest", "example": "C -> pASSWORD", "tooltip": "First character lowercase, rest uppercase."},
+        {"symbol": "t", "name": "Toggle all", "description": "Toggle case of all characters", "example": "t -> pASSWORD", "tooltip": "Swap uppercase to lowercase and vice versa."},
+        {"symbol": "TN", "name": "Toggle at N", "description": "Toggle case at position N", "example": "T3 -> pasSword", "tooltip": "Toggle case of character at position N (0-indexed). N can be 0-9 or A-Z (10-35)."},
+        {"symbol": "E", "name": "Title case", "description": "Lower all, then upper each word start", "example": "E -> Password Test", "tooltip": "Split on spaces, capitalize each segment."}
+      ]
+    },
+    {
+      "name": "Append / Prepend",
+      "rules": [
+        {"symbol": "$X", "name": "Append char", "description": "Append character X to the end", "example": "$1 -> password1", "tooltip": "Add a single character at the end of the word."},
+        {"symbol": "^X", "name": "Prepend char", "description": "Prepend character X at the start", "example": "^1 -> 1password", "tooltip": "Add a single character at the beginning of the word."},
+        {"symbol": "AN\"STR\"", "name": "Append string", "description": "Append the string STR", "example": "AN\"123\" -> password123", "tooltip": "Append a multi-character string to the end."},
+        {"symbol": "AO\"STR\"", "name": "Prepend string", "description": "Prepend the string STR", "example": "AO\"123\" -> 123password", "tooltip": "Prepend a multi-character string. Use Az for simpler form."}
+      ]
+    },
+    {
+      "name": "Positional",
+      "rules": [
+        {"symbol": "DN", "name": "Delete at N", "description": "Delete character at position N", "example": "D3 -> pasword", "tooltip": "Remove a single character at 0-indexed position N."},
+        {"symbol": "iNX", "name": "Insert at N", "description": "Insert character X at position N", "example": "i4! -> pass!word", "tooltip": "Insert character X before position N."},
+        {"symbol": "oNX", "name": "Overwrite at N", "description": "Overwrite char at position N with X", "example": "o3! -> pas!word", "tooltip": "Replace the character at position N with X."},
+        {"symbol": "xNM", "name": "Extract range", "description": "Extract M chars starting at position N", "example": "x04 -> pass", "tooltip": "Keep only M characters starting from position N. Truncates if shorter."},
+        {"symbol": "'N", "name": "Truncate at N", "description": "Truncate word at position N", "example": "'6 -> passwo", "tooltip": "Keep only the first N characters."},
+        {"symbol": "zN", "name": "Duplicate first N", "description": "Duplicate the first character N times", "example": "z2 -> pppassword", "tooltip": "Repeat the first character N additional times."},
+        {"symbol": "ZN", "name": "Duplicate last N", "description": "Duplicate the last character N times", "example": "Z2 -> passworddd", "tooltip": "Repeat the last character N additional times."},
+        {"symbol": "LN", "name": "Bitwise left at N", "description": "Bitwise shift left char at N", "example": "L0", "tooltip": "Multiply ASCII value of character at position N by 2."},
+        {"symbol": "RN", "name": "Bitwise right at N", "description": "Bitwise shift right char at N", "example": "R0", "tooltip": "Divide ASCII value of character at position N by 2."},
+        {"symbol": "+N", "name": "Increment at N", "description": "Increment ASCII of char at N by 1", "example": "+0 -> qassword", "tooltip": "Add 1 to the ASCII code of character at position N."},
+        {"symbol": "-N", "name": "Decrement at N", "description": "Decrement ASCII of char at N by 1", "example": "-0 -> oassword", "tooltip": "Subtract 1 from the ASCII code of character at position N."}
+      ]
+    },
+    {
+      "name": "Rotation / Reflection",
+      "rules": [
+        {"symbol": "r", "name": "Reverse", "description": "Reverse the entire word", "example": "r -> drowssap", "tooltip": "Reverse all characters in the word."},
+        {"symbol": "{", "name": "Rotate left", "description": "Rotate left: move first char to end", "example": "{ -> asswordp", "tooltip": "Remove the first character and append it to the end."},
+        {"symbol": "}", "name": "Rotate right", "description": "Rotate right: move last char to start", "example": "} -> dpasswor", "tooltip": "Remove the last character and prepend it to the start."},
+        {"symbol": "f", "name": "Reflect", "description": "Duplicate and reverse (word + reversed)", "example": "f -> passworddrowssap", "tooltip": "Append the reversed word to itself."},
+        {"symbol": "d", "name": "Duplicate", "description": "Duplicate the entire word", "example": "d -> passwordpassword", "tooltip": "Repeat the word once."},
+        {"symbol": "pN", "name": "Duplicate N times", "description": "Duplicate word N times", "example": "p2 -> passwordpasswordpassword", "tooltip": "Repeat the word N additional times."},
+        {"symbol": "q", "name": "Duplicate all", "description": "Duplicate every character", "example": "q -> ppaasssswwoorrdd", "tooltip": "Double each individual character."}
+      ]
+    },
+    {
+      "name": "Substitution",
+      "rules": [
+        {"symbol": "sXY", "name": "Replace X with Y", "description": "Replace all instances of X with Y", "example": "sa@ -> p@ssword", "tooltip": "Global character replacement: every X becomes Y."},
+        {"symbol": "@X", "name": "Purge X", "description": "Remove all instances of character X", "example": "@s -> paword", "tooltip": "Delete every occurrence of character X from the word."},
+        {"symbol": "S", "name": "Shift case at all", "description": "Replace all chars with next keyboard shift", "example": "S", "tooltip": "Toggle the shifted form of each character (e.g. a→A, 1→!)."}
+      ]
+    },
+    {
+      "name": "Rejection",
+      "rules": [
+        {"symbol": ">N", "name": "Reject < N+1", "description": "Reject word if length < N+1", "example": ">7 -> reject if <= 7", "tooltip": "Skip this word if its length is less than or equal to N. Use to enforce minimum length."},
+        {"symbol": "<N", "name": "Reject > N-1", "description": "Reject word if length > N-1", "example": "<8 -> reject if >= 8", "tooltip": "Skip this word if its length is greater than or equal to N."},
+        {"symbol": "!X", "name": "Reject with X", "description": "Reject if word contains char X", "example": "!$ -> reject if contains $", "tooltip": "Skip this word if it contains character X anywhere."},
+        {"symbol": "/X", "name": "Reject without X", "description": "Reject if word does NOT contain X", "example": "/a -> reject if no 'a'", "tooltip": "Skip this word if it does not contain character X."},
+        {"symbol": "(X", "name": "Reject not start X", "description": "Reject if first char is not X", "example": "(p -> reject if not start p", "tooltip": "Skip unless the word starts with character X."},
+        {"symbol": ")X", "name": "Reject not end X", "description": "Reject if last char is not X", "example": ")d -> reject if not end d", "tooltip": "Skip unless the word ends with character X."},
+        {"symbol": "Q", "name": "Reject no change", "description": "Reject if word was not modified by prior rules", "example": "Q", "tooltip": "If none of the preceding rules in this chain changed the word, reject it. Useful for selective rule application."}
+      ]
+    },
+    {
+      "name": "Memory",
+      "rules": [
+        {"symbol": "X", "name": "Save to mem", "description": "Save current word to memory (X)", "example": "X ... 4", "tooltip": "Memorize the current state of the word. Used with 4 (append from memory) or 6 (prepend from memory)."},
+        {"symbol": "4", "name": "Append from mem", "description": "Append the saved word from memory", "example": "X $1 4 -> passwordpassword1", "tooltip": "Append the memorized word. Must have used X first."},
+        {"symbol": "6", "name": "Prepend from mem", "description": "Prepend the saved word from memory", "example": "X $1 6 -> password1password", "tooltip": "Prepend the memorized word. Must have used X first."},
+        {"symbol": "M", "name": "Memorize & continue", "description": "Memorize current word and continue", "example": "M", "tooltip": "Save the word as-is to memory without stopping rule processing. Same as X but as a single-char alias."}
+      ]
+    }
+  ]
+}
