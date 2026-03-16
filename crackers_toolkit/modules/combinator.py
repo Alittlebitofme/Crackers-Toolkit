@@ -330,7 +330,7 @@ class CombinatorModule(BaseModule):
         self._preview_box = QTextEdit()
         self._preview_box.setReadOnly(True)
         self._preview_box.setMaximumHeight(160)
-        self._preview_box.setStyleSheet("font-family: Consolas, 'Courier New', monospace; font-size: 11px;")
+        self._preview_box.setStyleSheet("font-family: Consolas, 'DejaVu Sans Mono', 'Courier New', monospace; font-size: 11px;")
         self._preview_box.setPlaceholderText("Click 'Preview' to see the first 100 candidates\u2026")
         layout.addWidget(self._preview_box)
 

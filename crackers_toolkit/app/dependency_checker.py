@@ -59,7 +59,7 @@ def _check_jtr(base: Path) -> _CheckResult:
             return _CheckResult("John the Ripper", True, str(d / "run"), False, "")
     return _CheckResult(
         "John the Ripper", False, "not found", False,
-        "Place john-*-win64 folder next to the application.\n"
+        "Place a John the Ripper folder next to the application.\n"
         "Used by Hash Extractor for *2john extraction tools.",
     )
 

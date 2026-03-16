@@ -114,7 +114,7 @@ class PrinceProcessorModule(BaseModule):
         self._preview_box = QPlainTextEdit()
         self._preview_box.setReadOnly(True)
         self._preview_box.setMaximumHeight(180)
-        self._preview_box.setStyleSheet("font-family: Consolas, 'Courier New', monospace; font-size: 11px;")
+        self._preview_box.setStyleSheet("font-family: Consolas, 'DejaVu Sans Mono', 'Courier New', monospace; font-size: 11px;")
         self._preview_box.setPlaceholderText("Click 'Preview' to see the first 1 000 candidates…")
         layout.addWidget(self._preview_box)
 

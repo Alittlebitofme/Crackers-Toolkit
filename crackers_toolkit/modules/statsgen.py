@@ -136,7 +136,7 @@ class StatsGenModule(BaseModule):
         self._tab_complexity.setReadOnly(True)
         self._tab_raw = QTextEdit()
         self._tab_raw.setReadOnly(True)
-        self._tab_raw.setStyleSheet("font-family: Consolas, 'Courier New', monospace;")
+        self._tab_raw.setStyleSheet("font-family: Consolas, 'DejaVu Sans Mono', 'Courier New', monospace;")
 
         self._tabs.addTab(self._tab_length, "Length Distribution")
         self._tabs.addTab(self._tab_charset, "Character Sets")

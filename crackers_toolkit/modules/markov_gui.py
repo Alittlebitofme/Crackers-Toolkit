@@ -494,7 +494,7 @@ class MarkovChainModule(BaseModule):
         self._summary_text = QTextEdit()
         self._summary_text.setReadOnly(True)
         self._summary_text.setStyleSheet(
-            "font-family: 'Consolas', 'Courier New', monospace;"
+            "font-family: 'Consolas', 'DejaVu Sans Mono', 'Courier New', monospace;"
         )
         summary_lay.addWidget(self._summary_text)
         self._tabs.addTab(summary_tab, "Summary")

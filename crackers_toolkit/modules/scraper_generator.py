@@ -282,7 +282,9 @@ class ScraperGeneratorModule(BaseModule):
         self._type_group.addButton(self._ps_radio, 2)
         tl.addWidget(self._bash_radio)
         tl.addWidget(self._python_radio)
-        tl.addWidget(self._ps_radio)
+        import platform
+        if platform.system() == "Windows":
+            tl.addWidget(self._ps_radio)
         tl.addStretch()
         layout.addWidget(type_grp)
 
@@ -291,6 +293,7 @@ class ScraperGeneratorModule(BaseModule):
         layout.addWidget(QLabel("Code preview (editable before saving):"))
         self._code_preview = QTextEdit()
         self._code_preview.setFont(QFont("Consolas", 10))
+        self._code_preview.setStyleSheet("font-family: Consolas, 'DejaVu Sans Mono', monospace;")
         self._code_preview.setMinimumHeight(200)
         self._highlighter = _ScriptHighlighter(self._code_preview.document())
         layout.addWidget(self._code_preview)

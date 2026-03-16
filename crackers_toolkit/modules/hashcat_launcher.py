@@ -694,7 +694,7 @@ class HashcatLauncherModule(BaseModule):
         self._preview = QTextEdit()
         self._preview.setReadOnly(True)
         self._preview.setMaximumHeight(80)
-        self._preview.setStyleSheet("font-family: Consolas, 'Courier New', monospace;")
+        self._preview.setStyleSheet("font-family: Consolas, 'DejaVu Sans Mono', 'Courier New', monospace;")
         layout.addWidget(self._preview)
 
         row = QHBoxLayout()
@@ -882,14 +882,14 @@ class HashcatLauncherModule(BaseModule):
         if editable:
             self._edit_toggle.setText("Lock (rebuild)")
             self._preview.setStyleSheet(
-                "font-family: Consolas, 'Courier New', monospace; "
+                "font-family: Consolas, 'DejaVu Sans Mono', 'Courier New', monospace; "
                 "border: 1px solid #cba6f7;"
             )
             self._preview.setFocus()
         else:
             self._edit_toggle.setText("Edit Manually")
             self._preview.setStyleSheet(
-                "font-family: Consolas, 'Courier New', monospace;"
+                "font-family: Consolas, 'DejaVu Sans Mono', 'Courier New', monospace;"
             )
             self._update_preview()  # rebuild from GUI state
 

@@ -1110,7 +1110,7 @@ class HashExtractorModule(BaseModule):
         self._hash_output.setMinimumHeight(100)
         self._hash_output.setMaximumHeight(200)
         self._hash_output.setPlaceholderText("Extracted hash will appear here…")
-        self._hash_output.setStyleSheet("font-family: 'Consolas', 'Courier New', monospace;")
+        self._hash_output.setStyleSheet("font-family: 'Consolas', 'DejaVu Sans Mono', 'Courier New', monospace;")
         layout.addWidget(self._hash_output)
 
         # --- Buttons row ---

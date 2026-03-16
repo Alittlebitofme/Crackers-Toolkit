@@ -50,7 +50,7 @@ class LoggingPanel(QWidget):
 
         self._text = QTextEdit()
         self._text.setReadOnly(True)
-        self._text.setStyleSheet("font-family: 'Consolas', 'Courier New', monospace; font-size: 12px;")
+        self._text.setStyleSheet("font-family: 'Consolas', 'DejaVu Sans Mono', 'Courier New', monospace; font-size: 12px;")
         layout.addWidget(self._text)
 
     def log_command(self, command: str) -> int:
