@@ -588,13 +588,18 @@ def _build_curated_jtr() -> dict[str, ExtractorInfo]:
     for row in data:
         (script, name, cat, idesc, ffilter, modes, compat,
          notes, lang, deps) = row
-        out[script] = ExtractorInfo(
+        info = ExtractorInfo(
             name=name, script_name=script, source="john",
             language=lang, category=cat,
             input_description=idesc, file_filter=ffilter,
             hashcat_modes=modes, hashcat_compatible=compat,
             needs_cleanup=True, notes=notes, dependencies=deps,
         )
+        out[script] = info
+        # On Linux, JtR .exe tools are bare names (e.g. 'zip2john' not
+        # 'zip2john.exe').  Register the bare name too so discovery matches.
+        if script.endswith(".exe"):
+            out[script[:-4]] = info
     return out
 
 
@@ -911,14 +916,20 @@ class HashExtractorModule(BaseModule):
                     continue
                 seen_scripts.add(sname)
 
-                if sname in _CURATED_JTR:
-                    info = ExtractorInfo(**_CURATED_JTR[sname].__dict__)
+                curated = _CURATED_JTR.get(sname)
+                if curated:
+                    info = ExtractorInfo(**curated.__dict__)
                     info.script_path = f
                 else:
                     # Generic auto-discovered entry
                     suffix = f.suffix.lstrip(".")
                     lang = {"py": "python", "pl": "perl", "exe": "exe",
-                            "js": "js", "lua": "lua"}.get(suffix, "unknown")
+                            "js": "js", "lua": "lua"}.get(suffix, "")
+                    if not lang and not suffix and f.is_file():
+                        # Linux: extensionless executable (ELF binary)
+                        lang = "exe"
+                    if not lang:
+                        lang = "unknown"
                     raw_name = sname.split("2john")[0]
                     display = raw_name.replace("_", " ").replace("-", " ").title()
                     deps = ["Perl"] if lang == "perl" else []

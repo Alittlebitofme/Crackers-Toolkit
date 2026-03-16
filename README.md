@@ -2,24 +2,39 @@
 
 A unified desktop application that brings together 21 password cracking tools into a single, categorized interface with tooltips on every option, cross-module data transfer, and non-blocking execution.
 
-Built with **Python 3.12** and **PyQt6**. Packaged as a standalone Windows executable via PyInstaller — no Python installation required to run.
+Built with **Python 3.12** and **PyQt6**. Runs on **Windows** and **Linux (Debian/Ubuntu)**. Packaged as a standalone executable via PyInstaller — no Python installation required to run.
 
 ---
 
 ## Quick Start
 
-### Run from source
+### Windows
 
+**From release (recommended):**
+1. Download `CrackersToolkit-v1.0-win64.zip` from [Releases](https://github.com/Alittlebitofme/Crackers-Toolkit/releases)
+2. Extract the ZIP
+3. Run `setup.bat` to download external tools (hashcat, JtR, PRINCE, PCFG)
+4. Run `CrackersToolkit.exe`
+
+**From source:**
 ```bash
 pip install PyQt6
-cd d:\Crackers_toolkit
 python -m crackers_toolkit.main
 ```
 
-### Run the packaged executable
+### Linux (Debian/Ubuntu)
 
-```
-dist\CrackersToolkit\CrackersToolkit.exe
+**From release:**
+1. Download `CrackersToolkit-linux-amd64.tar.gz` from [Releases](https://github.com/Alittlebitofme/Crackers-Toolkit/releases)
+2. Extract: `tar xzf CrackersToolkit-linux-amd64.tar.gz`
+3. Run: `chmod +x setup.sh CrackersToolkit && ./setup.sh`
+4. Launch: `./CrackersToolkit`
+
+**From source:**
+```bash
+sudo apt install python3 python3-pip
+pip install PyQt6
+python3 -m crackers_toolkit.main
 ```
 
 ---
@@ -120,11 +135,25 @@ Crackers_toolkit/
 
 ## Building the Executable
 
+### Windows
+
 ```powershell
 pip install pyinstaller PyQt6
 pyinstaller crackers_toolkit.spec --noconfirm
 # Output: dist\CrackersToolkit\CrackersToolkit.exe
 ```
+
+### Linux (Debian/Ubuntu)
+
+```bash
+sudo apt install python3 python3-pip python3-dev
+pip install pyinstaller PyQt6
+python -m PyInstaller crackers_toolkit_linux.spec --noconfirm
+# Output: dist/CrackersToolkit/CrackersToolkit
+# Package: tar czf CrackersToolkit-linux-amd64.tar.gz -C dist/CrackersToolkit .
+```
+
+> **Note:** PyInstaller cannot cross-compile. The Linux build must be done on a Linux machine.
 
 ---
 
